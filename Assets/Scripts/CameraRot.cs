@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraRot : MonoBehaviour
 {
-    [SerializeField] private float mouseSpeed = 2f; //È¸Àü¼Óµµ
-    private float mouseY = 0f; //À§¾Æ·¡ È¸Àü°ªÀ» ´ãÀ» º¯¼ö
+    [SerializeField] private float mouseSpeed = 2f; // íšŒì „ì†ë„
+    private float mouseY = 0f; //ìœ„ì•„ë˜ íšŒì „ê°’ì„ ë‹´ì„ ë³€ìˆ˜
 
     // Start is called before the first frame update
     void Start()

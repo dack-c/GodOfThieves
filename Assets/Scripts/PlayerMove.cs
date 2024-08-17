@@ -35,27 +35,27 @@ public class PlayerMove : MonoBehaviour
             velocityY = 0f;
         }
 
-        // ÁÂ¿ì ½ÃÁ¡ º¯°æ
+        // ì¢Œìš° ì‹œì  ë³€ê²½
         mouseX += Input.GetAxis("Mouse X") * mouseSpeed;
         transform.localEulerAngles = new Vector3(0, mouseX, 0);
 
-        // ÇÃ·¹ÀÌ¾î ¼öÆò ¿òÁ÷ÀÓ
+        // í”Œë ˆì´ì–´ ìˆ˜í‰ ì›€ì§ì„
         mov = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         mov = controller.transform.TransformDirection(mov);
 
-        // Á¦°ö±ÙÀ» »ç¿ëÇÏ¿© Á¡ÇÁÀÇ ³ôÀÌ¸¦ Á¶ÀıÇÕ´Ï´Ù.
+        // ì œê³±ê·¼ì„ ì‚¬ìš©í•˜ì—¬ ì í”„ì˜ ë†’ì´ë¥¼ ì¡°ì ˆí•©ë‹ˆë‹¤.
         if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
             velocityY = Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
         }
 
-        // ½Ã°£À» »ç¿ëÇÏ¿© Áß·Â °¡¼Óµµ¸¦ ±¸ÇöÇÕ´Ï´Ù.
+        // ì‹œê°„ì„ ì‚¬ìš©í•˜ì—¬ ì¤‘ë ¥ ê°€ì†ë„ë¥¼ êµ¬í˜„í•©ë‹ˆë‹¤.
         velocityY += gravityValue * Time.deltaTime;
 
-        // ¼öÆò ÀÌµ¿
+        // ìˆ˜í‰ ì´ë™
         controller.Move(mov * Time.deltaTime * speed);
 
-        // ¼öÁ÷ ÀÌµ¿(Á¡ÇÁ ¹× ³«ÇÏ)
+        // ìˆ˜ì§ ì´ë™(ì í”„ ë° ë‚™í•˜)
         controller.Move(new Vector3(0, velocityY, 0) * Time.deltaTime);
     }
 }
