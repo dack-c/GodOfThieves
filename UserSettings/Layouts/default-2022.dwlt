@@ -417,8 +417,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
+      m_SelectedIDs: 8a590000
+      m_LastClickedID: 22922
       m_ExpandedIDs: 30fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -1832,7 +1832,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets
   m_LastFoldersGridSize: 16
-  m_LastProjectPath: C:\Users\dack\workspace2\unity_projects_temp\GodOfThieves
+  m_LastProjectPath: C:\Users\dack\workspace2\unity_projects2\GodOfThieves
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
