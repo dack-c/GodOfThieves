@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraRot : MonoBehaviour
 {
-    [SerializeField] private float mouseSpeed = 8f; //회전속도
+    [SerializeField] private float mouseSpeed = 2f; //회전속도
     private float mouseY = 0f; //위아래 회전값을 담을 변수
 
     // Start is called before the first frame update
@@ -17,8 +17,8 @@ public class CameraRot : MonoBehaviour
     void Update()
     {
         mouseY += Input.GetAxis("Mouse Y") * mouseSpeed;
-        mouseY = Mathf.Clamp(-mouseY, -50f, 30f);
+        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
 
-        this.transform.localEulerAngles = new Vector3(mouseY, 0, 0);
+        this.transform.localEulerAngles = new Vector3(-mouseY, 0, 0);
     }
 }
