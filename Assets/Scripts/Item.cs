@@ -9,6 +9,7 @@ public abstract class Item : MonoBehaviour
     public string itemName;
 
     public bool bGetted;
+    public bool bWearItem = false;
     private void Start()
     {
         bGetted = false;

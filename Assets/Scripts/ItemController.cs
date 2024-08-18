@@ -6,6 +6,7 @@ using TMPro;
 
 public class ItemController : MonoBehaviour
 {
+    private List<Item> wearingItems;
     private GameObject[] itemObjs;
     private int emptySlotIndex;
     private int curSlotIndex;
@@ -35,6 +36,7 @@ public class ItemController : MonoBehaviour
         emptySlotIndex = 0;
         curSlotIndex = 0;
         itemObjs = new GameObject[itemLayoutObj.transform.childCount];
+        wearingItems = new List<Item>();
     }
 
     // Update is called once per frame
@@ -74,7 +76,16 @@ public class ItemController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.R) && itemObjs[curSlotIndex] != null)  // 아이템 사용
         {
-            itemObjs[curSlotIndex].GetComponent<Item>().Use();
+            Item item = itemObjs[curSlotIndex].GetComponent<Item>();
+            item.Use();
+            if(item.bWearItem)
+            {
+                item.gameObject.SetActive(false);
+                getItemSlotUI(curSlotIndex).SetIcon(null);
+                wearingItems.Add(item);
+                itemObjs[curSlotIndex] = null;
+            }
+
         }
     }
 
@@ -90,8 +101,9 @@ public class ItemController : MonoBehaviour
 
         itemObjs[emptySlotIndex] = itemObj;
 
-        Image iconToSet = itemLayoutObj.transform.GetChild(emptySlotIndex).GetChild(0).gameObject.GetComponent<Image>();
-        iconToSet.sprite = item.icon;
+        /*Image iconToSet = itemLayoutObj.transform.GetChild(emptySlotIndex).GetChild(0).gameObject.GetComponent<Image>();
+        iconToSet.sprite = item.icon;*/
+        getItemSlotUI(emptySlotIndex).SetIcon(item.icon);
 
         if(emptySlotIndex == curSlotIndex)
         {
@@ -104,8 +116,10 @@ public class ItemController : MonoBehaviour
     void EquipItem(int index)
     {
         // 해당 아이템 슬롯 테두리 하이라이트
-        itemLayoutObj.transform.GetChild(curSlotIndex).GetChild(1).gameObject.SetActive(false);
-        itemLayoutObj.transform.GetChild(index).GetChild(1).gameObject.SetActive(true);
+        /*itemLayoutObj.transform.GetChild(curSlotIndex).GetChild(1).gameObject.SetActive(false);
+        itemLayoutObj.transform.GetChild(index).GetChild(1).gameObject.SetActive(true);*/
+        getItemSlotUI(curSlotIndex).SetHighlight(false);
+        getItemSlotUI(index).SetHighlight(true);
 
         // 해당 아이템 장착
         if (itemObjs[curSlotIndex] != null)
@@ -118,5 +132,15 @@ public class ItemController : MonoBehaviour
         }
 
         curSlotIndex = index;
+    }
+
+    private ItemSlotUI getItemSlotUI(int index)
+    {
+        return itemLayoutObj.transform.GetChild(index).GetComponent<ItemSlotUI>();
+    }
+
+    void DropItem(int index)
+    {
+
     }
 }
