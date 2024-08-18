@@ -95,9 +95,8 @@ public class ItemController : MonoBehaviour
         itemObj.transform.position = transform.position;
         itemObj.transform.parent = transform;
         item.SetRotationToEquip();
+        item.Getted();
         itemObj.SetActive(false);
-
-        item.bGetted = true;
 
         itemObjs[emptySlotIndex] = itemObj;
 
@@ -134,13 +133,20 @@ public class ItemController : MonoBehaviour
         curSlotIndex = index;
     }
 
+    public Item FindItemInSlotOrNull(string itemName)
+    {
+        foreach (var itemObj in itemObjs)
+        {
+            if(itemObj.GetComponent<Item>().itemName == itemName)
+            {
+                return itemObj.GetComponent<Item>();
+            }
+        }
+        return null;
+    }
+
     private ItemSlotUI getItemSlotUI(int index)
     {
         return itemLayoutObj.transform.GetChild(index).GetComponent<ItemSlotUI>();
-    }
-
-    void DropItem(int index)
-    {
-
     }
 }

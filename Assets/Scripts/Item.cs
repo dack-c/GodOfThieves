@@ -25,5 +25,9 @@ public abstract class Item : MonoBehaviour
     }
 
     public abstract void Use();
+    public virtual void Getted()
+    {
+        bGetted = true;
+    }
 
 }
