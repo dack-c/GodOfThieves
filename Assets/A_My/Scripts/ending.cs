@@ -19,28 +19,27 @@ public class ending : MonoBehaviour
     {
         thisImg=GetComponent<Image>();
 
-        switch(end_br){
-            case 1:
-            thisImg.sprite = img1;
-            break;
-            case 2:
-            thisImg.sprite = img2;
-            break;
-            case 3:
-            thisImg.sprite = img3;
-            break;
-            case 4:
-            thisImg.sprite = img4;
-            break;
-            case 5:
-            thisImg.sprite = img5;
-            break;
-            case 6:
-            thisImg.sprite = img6;
-            break;
-            default:
-            break;
-
+        GameManager.Ending endingVer = GameManager.instance.ending;
+        switch(endingVer)
+        {
+            case GameManager.Ending.CaptureCCTV:
+                thisImg.sprite = img1;
+                break;
+            case GameManager.Ending.MissingGloves:
+                thisImg.sprite = img2;
+                break;
+            case GameManager.Ending.MissingShoes:
+                thisImg.sprite = img3;
+                break;
+            case GameManager.Ending.homeInvasion:
+                thisImg.sprite = img4;
+                break;
+            case GameManager.Ending.CatSound:
+                thisImg.sprite = img5;
+                break;
+            case GameManager.Ending.Sucess:
+                thisImg.sprite = img6;
+                break;
         }
     }
 

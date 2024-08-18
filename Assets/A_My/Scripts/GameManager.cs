@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    enum Ending
+    public enum Ending
     {
         CatSound,
         homeInvasion,
@@ -23,6 +25,11 @@ public class GameManager : MonoBehaviour
 
     public Timer timer;
     public GameObject playerObj;
+    public TextMeshProUGUI pickupInteractableNoti;
+    public NotiManager wearNotiManager;
+    public ItemController itemController;
+
+    public Ending ending;
 
     
     // 게임 시작과 동시에 싱글톤을 구성
@@ -33,6 +40,7 @@ public class GameManager : MonoBehaviour
         {
             // instance가 비어있다면(null) 그곳에 자기 자신을 할당
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -52,7 +60,6 @@ public class GameManager : MonoBehaviour
 
     public void EndGame(bool bTimeout)
     {
-        Ending ending;
         if(bTimeout)
         {
             ending = Ending.CaptureCCTV;
@@ -76,6 +83,7 @@ public class GameManager : MonoBehaviour
         }
 
         //실제로 엔딩씬으로 씬전환 필요
+        SceneManager.LoadScene("ending_scene");
     }
 
     // Start is called before the first frame update
