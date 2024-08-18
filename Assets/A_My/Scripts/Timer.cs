@@ -7,17 +7,36 @@ public class Timer : MonoBehaviour
 {
     private TMP_Text timeText;
     private bool bGameEnd = false;
+    public GameObject fade;
+    public GameObject npc1;
+    public GameObject npc2;
 
     public float remainTime = 300f;
+    int a;
+    
     void Awake()
     {
+        a=0;
         timeText = GetComponent<TMP_Text>();
         gameObject.SetActive(false);
     }
-
+    void faded()
+    {
+        fade.gameObject.SetActive(false);
+    }
     // 다시 게임오브젝트가 활성화되면 실행
+    
     void Update()
     {
+        if(a==0)
+        {
+            a=1;
+            fade.gameObject.SetActive(true);
+            npc1.gameObject.SetActive(false);
+            npc2.gameObject.SetActive(false);
+            Invoke("faded",1f);
+
+        }
         if (!bGameEnd)
         {
             if (remainTime > 0)
