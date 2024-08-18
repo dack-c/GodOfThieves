@@ -12,6 +12,8 @@ public class Cat : Item
     private bool bFindFish = false;
     private Transform fishTransform;
     private bool bPlayingSound = false;
+    private GameObject soundGameObj;
+
     //RaycastHit rayHit = new RaycastHit();
 
     //public Transform testTarget;
@@ -50,18 +52,57 @@ public class Cat : Item
                 }
             }
         }
-        else
+        else if(!bGetted)
         {
             agent.SetDestination(fishTransform.position);
         }
 
-        if(bGetted && !bPlayingSound)
+        /*if(bGetted && !bPlayingSound)
         {
+            agent.isStopped = true;
+            agent.enabled = false;
+            agent.transform.position = transform.parent.position;
+            SetRotationToEquip();
+
+            // cat이 비활성화(아이템 교체)되도 소리 계속 날 수 있도록
+            soundGameObj = new GameObject("CatSound", typeof(AudioSource));
+            soundGameObj.GetComponent<AudioSource>().clip = audioSource.clip;
+            soundGameObj.GetComponent<AudioSource>().loop = audioSource.loop;
+            soundGameObj.GetComponent<AudioSource>().playOnAwake = audioSource.playOnAwake;
+            soundGameObj.transform.position = transform.position;
+            soundGameObj.transform.parent = transform.parent.parent;
+
             bPlayingSound = true;
-            audioSource.Play();
-        }
+            soundGameObj.GetComponent<AudioSource>().Play();
+        }*/
     }
 
+    public override void Getted()
+    {
+        agent.isStopped = true;
+        agent.enabled = false;
+
+        // cat이 비활성화(아이템 교체)되도 소리 계속 날 수 있도록
+        soundGameObj = new GameObject("CatSound", typeof(AudioSource));
+        soundGameObj.GetComponent<AudioSource>().clip = audioSource.clip;
+        soundGameObj.GetComponent<AudioSource>().loop = audioSource.loop;
+        soundGameObj.GetComponent<AudioSource>().playOnAwake = audioSource.playOnAwake;
+        soundGameObj.transform.position = transform.position;
+        soundGameObj.transform.parent = transform.parent.parent;
+
+        bPlayingSound = true;
+        soundGameObj.GetComponent<AudioSource>().Play();
+
+        bGetted = true;
+    }
+
+    public void StopSound()
+    {
+        if(soundGameObj && bPlayingSound)
+        {
+            soundGameObj.GetComponent<AudioSource>().Stop();
+        }
+    }
 
     public override void Use()
     {
