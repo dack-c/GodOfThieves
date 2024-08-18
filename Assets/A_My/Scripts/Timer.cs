@@ -23,7 +23,7 @@ public class Timer : MonoBehaviour
             if (remainTime > 0)
             {
                 remainTime -= Time.deltaTime;
-                timeText.text = Mathf.Ceil(remainTime).ToString();
+                timeText.text = "CCTV가 다시 켜질때까지 남은 시간(초): " + Mathf.Ceil(remainTime).ToString();
             }
             else
             {

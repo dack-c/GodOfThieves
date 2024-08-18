@@ -65,6 +65,10 @@ public class GameManager : MonoBehaviour
             ending = Ending.CaptureCCTV;
             Debug.Log("timeout ending");
         }
+        else if (20 > timeValue || timeValue > 22)
+        {
+            ending = Ending.homeInvasion;
+        }
         else if(bCatSound)
         {
             ending = Ending.CatSound;
@@ -77,10 +81,11 @@ public class GameManager : MonoBehaviour
         {
             ending = Ending.MissingGloves;
         }
-        else if(20 <= timeValue && timeValue <= 22)
+        else
         {
-            ending = Ending.homeInvasion;
+            ending = Ending.Sucess;
         }
+        
 
         //실제로 엔딩씬으로 씬전환 필요
         SceneManager.LoadScene("ending_scene");

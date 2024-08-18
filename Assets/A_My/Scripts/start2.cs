@@ -12,12 +12,12 @@ public class start2 : MonoBehaviour
     // Start is called before the first frame update
     public void OnButtonClicked()
     {
-        SceneManager.LoadScene("scene1");  
+        SceneManager.LoadScene("scene1_dack2");  
     }
 
     public int Button()
     {
-        SceneManager.LoadScene("scene1");  
+        SceneManager.LoadScene("scene1_dack2");  
         return 0;
     }
 

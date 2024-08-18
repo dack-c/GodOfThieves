@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Door : Interactable
 {
@@ -9,6 +10,8 @@ public class Door : Interactable
     public float teleportOffset;
     public float playerSizeToMul = 1f;
     public bool bLocked = false;
+    public bool bFriendDoor = false;
+    public bool bHomeExternalDoor = false;
 
     private Vector3 nextDoorPos;
     private Vector3 originPlayerScale;
@@ -28,6 +31,14 @@ public class Door : Interactable
         }
         else
         {
+            if(bFriendDoor && (20 > GameManager.instance.timeValue || GameManager.instance.timeValue > 22))
+            {
+                GameManager.instance.EndGame(false);
+            }
+            else if(bHomeExternalDoor && GameManager.instance.itemController.FindItemInSlotOrNull("고양이"))
+            {
+                GameManager.instance.EndGame(false);
+            }
             GameManager.instance.playerObj.GetComponent<CharacterController>().enabled = false;
             nextDoorPos = nextDoorTransform.position + nextDoorTransform.forward * teleportOffset;
             GameManager.instance.playerObj.transform.position = nextDoorPos;

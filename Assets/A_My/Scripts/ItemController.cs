@@ -17,6 +17,8 @@ public class ItemController : MonoBehaviour
     public GameObject itemLayoutObj;
     public TextMeshProUGUI pickupInteractableNoti;
     public float maxDistanceToGetItem = 5f;  //아이템으로부터 이 거리 이상 벗어나면 아이템 획득 불가
+
+    public bool bAcitiveNumKey = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -77,7 +79,7 @@ public class ItemController : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            if (Input.GetKeyDown((KeyCode)(i + 49)))  // 숫자키 1~9 입력 감지
+            if (bAcitiveNumKey && Input.GetKeyDown((KeyCode)(i + 49)))  // 숫자키 1~9 입력 감지
             {
                 EquipItem(i);
                 break;
@@ -147,7 +149,7 @@ public class ItemController : MonoBehaviour
     {
         foreach (var itemObj in itemObjs)
         {
-            if(itemObj.GetComponent<Item>().itemName == itemName)
+            if(itemObj && itemObj.GetComponent<Item>().itemName == itemName)
             {
                 return itemObj.GetComponent<Item>();
             }

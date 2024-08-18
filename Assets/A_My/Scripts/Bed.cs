@@ -13,6 +13,7 @@ public class Bed : Interactable
     public override void Interact()
     {
         Debug.Log("interact 호출");
+        GameManager.instance.itemController.bAcitiveNumKey = false;
         timeSelectionObj.SetActive(true);
         //timeInputField = timeInputObj.GetComponent<InputField>(); 
     }
@@ -38,6 +39,7 @@ public class Bed : Interactable
         int sunAngle = -90 - 15 * timeValue;
         directionaLight.transform.eulerAngles = new Vector3(sunAngle, -30, 0);
 
+        GameManager.instance.itemController.bAcitiveNumKey = true;
         timeSelectionObj.SetActive(false);
         GameManager.instance.StartTimer(timeValue);
         bStopInteract = true;

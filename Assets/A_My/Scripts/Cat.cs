@@ -91,6 +91,7 @@ public class Cat : Item
         soundGameObj.transform.parent = transform.parent.parent;
 
         bPlayingSound = true;
+        GameManager.instance.bCatSound = true;
         soundGameObj.GetComponent<AudioSource>().Play();
 
         bGetted = true;

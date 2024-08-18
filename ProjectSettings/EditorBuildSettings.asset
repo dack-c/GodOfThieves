@@ -8,13 +8,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/A_My/Scenes/start_scene.unity
     guid: d016220f876257d499a5d1964a99d8b8
-  - enabled: 1
+  - enabled: 0
     path: Assets/A_My/Scenes/scene1.unity
     guid: c667f467fbb4d4945af5404d0cac2273
   - enabled: 1
     path: Assets/A_My/Scenes/ending_scene.unity
     guid: b27c1b0b3bcf14c4589a8de2a62b05d4
-  - enabled: 1
+  - enabled: 0
     path: Assets/A_My/Scenes/scene1_dack.unity
     guid: aa8e1b8688483bf4aa27688e289433f2
+  - enabled: 1
+    path: Assets/A_My/Scenes/scene1_dack2.unity
+    guid: 70fd817ff81c5474bb74adacecb16dac
   m_configObjects: {}
