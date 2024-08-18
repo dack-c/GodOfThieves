@@ -15,5 +15,6 @@ public class Glove : Item
     public override void Use()
     {
         wearNotiManager.StartNotiForSec("장갑?을 장착했습니다.", notiDuration);
+        GameManager.instance.bEquipGloves = true;
     }
 }

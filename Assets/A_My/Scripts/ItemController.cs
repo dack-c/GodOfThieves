@@ -15,7 +15,7 @@ public class ItemController : MonoBehaviour
     
 
     public GameObject itemLayoutObj;
-    public TextMeshProUGUI pickupNoti;
+    public TextMeshProUGUI pickupInteractableNoti;
     public float maxDistanceToGetItem = 5f;  //아이템으로부터 이 거리 이상 벗어나면 아이템 획득 불가
     // Start is called before the first frame update
     void Start()
@@ -25,13 +25,13 @@ public class ItemController : MonoBehaviour
             Debug.LogError("itemLayoutObj가 null입니다! 할당해주세요.");
         }
 
-        if(pickupNoti == null)
+        if(pickupInteractableNoti == null)
         {
             Debug.LogError("pickupNot가 null입니다! 할당해주세요.");
         }
         else
         {
-            pickupNoti.gameObject.SetActive(false);
+            pickupInteractableNoti.gameObject.SetActive(false);
         }
         emptySlotIndex = 0;
         curSlotIndex = 0;
@@ -46,23 +46,33 @@ public class ItemController : MonoBehaviour
         if (Physics.Raycast(ray, out hit, maxDistanceToGetItem))
         {
             Item item = hit.collider.GetComponent<Item>();
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
             if(item && item.bGetted == false)
             {
-                pickupNoti.gameObject.SetActive(true);
-                pickupNoti.text = "[E] Pickup " + item.itemName;
+                pickupInteractableNoti.gameObject.SetActive(true);
+                pickupInteractableNoti.text = "[E] Pickup " + item.itemName;
                 if(Input.GetKeyDown(KeyCode.E))  // 아이템 장착
                 {
                     GetItem(item);
                 }
             }
+            else if(interactable && interactable.bStopInteract == false)
+            {
+                pickupInteractableNoti.gameObject.SetActive(true);
+                pickupInteractableNoti.text = "[E] 상호작용: " + interactable.interactName;
+                if (Input.GetKeyDown(KeyCode.E))  // 상호작용
+                {
+                    interactable.Interact();
+                }
+            }
             else
             {
-                pickupNoti.gameObject.SetActive(false);
+                pickupInteractableNoti.gameObject.SetActive(false);
             }
         }
         else
         {
-            pickupNoti.gameObject.SetActive(false);
+            pickupInteractableNoti.gameObject.SetActive(false);
         }
 
         for (int i = 0; i < 9; i++)

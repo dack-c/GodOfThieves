@@ -101,6 +101,7 @@ public class Cat : Item
         if(soundGameObj && bPlayingSound)
         {
             soundGameObj.GetComponent<AudioSource>().Stop();
+            GameManager.instance.bCatSound = false;
         }
     }
 
