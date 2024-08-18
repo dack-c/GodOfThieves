@@ -6,9 +6,12 @@ public abstract class Item : MonoBehaviour
 {
     public Sprite icon;
     public Vector3 equipRotation;
+    public string itemName;
 
+    public bool bGetted;
     private void Start()
     {
+        bGetted = false;
         if(equipRotation == null)
         {
             equipRotation = transform.localEulerAngles;

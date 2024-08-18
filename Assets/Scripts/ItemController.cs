@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ItemController : MonoBehaviour
 {
@@ -13,12 +14,23 @@ public class ItemController : MonoBehaviour
     
 
     public GameObject itemLayoutObj;
+    public TextMeshProUGUI pickupNoti;
+    public float maxDistanceToGetItem = 5f;  //아이템으로부터 이 거리 이상 벗어나면 아이템 획득 불가
     // Start is called before the first frame update
     void Start()
     {
         if(itemLayoutObj == null)
         {
             Debug.LogError("itemLayoutObj가 null입니다! 할당해주세요.");
+        }
+
+        if(pickupNoti == null)
+        {
+            Debug.LogError("pickupNot가 null입니다! 할당해주세요.");
+        }
+        else
+        {
+            pickupNoti.gameObject.SetActive(false);
         }
         emptySlotIndex = 0;
         curSlotIndex = 0;
@@ -29,18 +41,26 @@ public class ItemController : MonoBehaviour
     void Update()
     {
         ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, maxDistanceToGetItem))
         {
             Item item = hit.collider.GetComponent<Item>();
-            if (item && Input.GetKeyDown(KeyCode.E))  // 아이템 장착
+            if(item && item.bGetted == false)
             {
-                GetItem(item);
+                pickupNoti.gameObject.SetActive(true);
+                pickupNoti.text = "[E] Pickup " + item.itemName;
+                if(Input.GetKeyDown(KeyCode.E))  // 아이템 장착
+                {
+                    GetItem(item);
+                }
             }
-
-            if(item)
+            else
             {
-                Debug.Log("아이템 장착가능.");
+                pickupNoti.gameObject.SetActive(false);
             }
+        }
+        else
+        {
+            pickupNoti.gameObject.SetActive(false);
         }
 
         for (int i = 0; i < 9; i++)
@@ -66,6 +86,8 @@ public class ItemController : MonoBehaviour
         item.SetRotationToEquip();
         itemObj.SetActive(false);
 
+        item.bGetted = true;
+
         itemObjs[emptySlotIndex] = itemObj;
 
         Image iconToSet = itemLayoutObj.transform.GetChild(emptySlotIndex).GetChild(0).gameObject.GetComponent<Image>();
@@ -81,6 +103,11 @@ public class ItemController : MonoBehaviour
 
     void EquipItem(int index)
     {
+        // 해당 아이템 슬롯 테두리 하이라이트
+        itemLayoutObj.transform.GetChild(curSlotIndex).GetChild(1).gameObject.SetActive(false);
+        itemLayoutObj.transform.GetChild(index).GetChild(1).gameObject.SetActive(true);
+
+        // 해당 아이템 장착
         if (itemObjs[curSlotIndex] != null)
         {
             itemObjs[curSlotIndex].SetActive(false);
@@ -89,6 +116,7 @@ public class ItemController : MonoBehaviour
         {
             itemObjs[index].SetActive(true);
         }
+
         curSlotIndex = index;
     }
 }
