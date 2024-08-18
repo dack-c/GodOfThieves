@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraRot : MonoBehaviour
 {
-    [SerializeField] private float mouseSpeed = 8f; //È¸Àü¼Óµµ
-    private float mouseY = 0f; //À§¾Æ·¡ È¸Àü°ªÀ» ´ãÀ» º¯¼ö
+    [SerializeField] private float mouseSpeed = 2f; // íšŒì „ì†ë„
+    private float mouseY = 0f; //ìœ„ì•„ë˜ íšŒì „ê°’ì„ ë‹´ì„ ë³€ìˆ˜
 
     // Start is called before the first frame update
     void Start()
@@ -17,8 +17,8 @@ public class CameraRot : MonoBehaviour
     void Update()
     {
         mouseY += Input.GetAxis("Mouse Y") * mouseSpeed;
-        mouseY = Mathf.Clamp(-mouseY, -50f, 30f);
+        mouseY = Mathf.Clamp(mouseY, -90f, 90f);
 
-        this.transform.localEulerAngles = new Vector3(mouseY, 0, 0);
+        this.transform.localEulerAngles = new Vector3(-mouseY, 0, 0);
     }
 }
