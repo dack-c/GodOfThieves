@@ -14,7 +14,18 @@ public class talk : MonoBehaviour
         
     }
 
-    public void OnCollisionEnter(Collision col)
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            tl.text = "도라에몽은 유독 어디 밑에\n들어가있는걸 좋아하더라";
+            tl2.text = "진구";
+            dd.gameObject.SetActive(true);
+            Invoke("off", 5f);
+        }
+    }
+
+    /*public void OnCollisionEnter(Collision col)
     {
         if(col.gameObject.tag=="Player")
         {
@@ -23,7 +34,7 @@ public class talk : MonoBehaviour
             dd.gameObject.SetActive(true);
             Invoke("off", 2f);
         }
-    }
+    }*/
     void off()
     {
         dd.gameObject.SetActive(false);
