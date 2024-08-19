@@ -15,6 +15,9 @@ public class Glove : Item
     public override void Use()
     {
         wearNotiManager.StartNotiForSec("장갑?을 장착했습니다.", notiDuration);
-        GameManager.instance.bEquipGloves = true;
+        if (GameManager.instance.timer.bStratTimer == false || (GameManager.instance.timer.bStratTimer && GameManager.instance.bEnterFriendHouse == false))
+        {
+            GameManager.instance.bEquipGloves = true;
+        }
     }
 }

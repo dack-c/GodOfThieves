@@ -16,6 +16,9 @@ public class Shoes : Item
     public override void Use()
     {
         wearNotiManager.StartNotiForSec("덧신을 장착했습니다.", notiDuration);
-        GameManager.instance.bEquipShoes = true;
+        if(GameManager.instance.timer.bStratTimer == false || (GameManager.instance.timer.bStratTimer && GameManager.instance.bEnterFriendHouse == false))
+        {
+            GameManager.instance.bEquipShoes = true;
+        }
     }
 }

@@ -13,7 +13,9 @@ public class Timer : MonoBehaviour
 
     public float remainTime = 300f;
     int a;
-    
+
+    public bool bStratTimer;
+
     void Awake()
     {
         a=0;
@@ -25,7 +27,12 @@ public class Timer : MonoBehaviour
         fade.gameObject.SetActive(false);
     }
     // 다시 게임오브젝트가 활성화되면 실행
-    
+
+    private void Start()
+    {
+        bStratTimer = true;
+    }
+
     void Update()
     {
         if(a==0)

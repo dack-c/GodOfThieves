@@ -28,10 +28,14 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI pickupInteractableNoti;
     public NotiManager wearNotiManager;
     public ItemController itemController;
+    public Door FriendExternalDoor;
 
     public Ending ending;
 
-    
+    public bool bEnterFriendHouse = false;
+    public bool bExitFriendHouse = false;
+
+
     // 게임 시작과 동시에 싱글톤을 구성
     void Awake()
     {
